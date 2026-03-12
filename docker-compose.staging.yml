@@ -1,0 +1,40 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.staging
+    container_name: khaffah_frontend_staging
+    restart: unless-stopped
+    ports:
+      - "3000:3000" # Map to a different host port (3001) to avoid conflicts with dev
+    networks:
+      - khaffah_frontend_network_staging
+      # volumes:
+      # Mount the .next folder as a volume to cache build outputs
+      # - ./.next:/app/.next
+      # Mount node_modules as a volume to persist packages across builds
+      # - /app/node_modules
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: khaffah_frontend_cloudflared_dev
+    restart: unless-stopped
+    depends_on:
+      - app
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    networks:
+      - khaffah_frontend_network_staging
+    volumes:
+      - ./cloudflared:/etc/cloudflared
+    healthcheck:
+      test: [ 'CMD-SHELL', 'wget --quiet --tries=1 --spider http://app:3000/ || exit 1' ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  khaffah_frontend_network_staging:
+    driver: bridge

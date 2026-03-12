@@ -1,0 +1,4 @@
+# Salin ke .env.local lalu isi dengan URL backend.
+# Development: http://127.0.0.1:8000
+# Production:  https://apikaffah.paperostudio.com
+NEXT_PUBLIC_API=https://apikaffah.paperostudio.com
