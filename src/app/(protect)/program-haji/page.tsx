@@ -3,6 +3,8 @@ import { FeatureSection, Note, Faq } from "@/components/shared";
 import ProgramHajiServicesList from "@/components/pages/program-haji/services_list";
 import ProgramHajiEasyway from "@/components/pages/program-haji/easyway";
 
+export const dynamic = "force-dynamic";
+
 const ProgramHaji = () => {
   return (
     <>

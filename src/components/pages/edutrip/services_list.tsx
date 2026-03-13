@@ -21,17 +21,12 @@ type EdutripPackagesEnvelope = {
 const EdutripServicesList = () => {
   const { data, isLoading, error } = useEdutripPaket();
 
-  // Debug logs
-  console.log("🔍 useEdutripPaket hook state:", { data, isLoading, error });
-
   // Axios response structure: response.data -> { status, message, data: [...] }
   const envelope =
     (data as unknown as { data?: EdutripPackagesEnvelope } | undefined)?.data;
   const packages: EdutripPackage[] = Array.isArray(envelope?.data)
     ? envelope!.data!
     : [];
-
-  console.log("📦 Extracted edutrip packages:", packages);
 
   // Helper: determine link based on package ID
   const getPackageLink = (pkg: EdutripPackage) => {

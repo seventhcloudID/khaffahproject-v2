@@ -3,6 +3,9 @@ import EdutripBenefit from "@/components/pages/edutrip/benefit";
 import EdutripWhenever from "@/components/pages/edutrip/whenever";
 import { Faq } from "@/components/shared";
 import EdutripServicesList from "@/components/pages/edutrip/services_list";
+
+export const dynamic = "force-dynamic";
+
 const Edutrip = () => {
   return (
     <>

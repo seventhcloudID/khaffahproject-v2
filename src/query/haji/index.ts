@@ -8,7 +8,6 @@ export const useHajiPaket = () => {
   const queryFn = async () => {
     try {
       const response = await apiInstance.get(`/api/haji/paket`);
-      console.log("✅ Haji paket response:", response.data);
       return response;
     } catch (error: unknown) {
       console.error("❌ Error fetching haji paket:", error);

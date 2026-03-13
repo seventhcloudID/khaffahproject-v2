@@ -8,7 +8,6 @@ export const useEdutripPaket = () => {
   const queryFn = async () => {
     try {
       const response = await apiInstance.get(`/api/edutrip/paket`);
-      console.log("✅ Edutrip paket response:", response.data);
       return response;
     } catch (error: unknown) {
       console.error("❌ Error fetching edutrip paket:", error);

@@ -45,17 +45,12 @@ const ProgramHajiServicesList = () => {
   const { data, isLoading, error } = useHajiPaket();
   const { isError: isNotLoggedIn } = useMe();
 
-  // Debug logs
-  console.log("🔍 useHajiPaket hook state:", { data, isLoading, error });
-
   // Axios biasanya: response.data -> { status, message, data: [...] }
   const envelope =
     (data as unknown as { data?: HajiPackagesEnvelope } | undefined)?.data;
   const packages: HajiPackage[] = Array.isArray(envelope?.data)
     ? envelope!.data!
     : [];
-
-  console.log("📦 Extracted packages:", packages);
 
   // Helper: format harga (aman untuk string ber-format)
   const formatPrice = (price: string | number) => {
